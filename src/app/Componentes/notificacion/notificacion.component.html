@@ -1,0 +1,43 @@
+<body>
+    <header class="header">
+        <div class="header__content">
+            <img src="assets/descarga.png" alt="Logo ULEAM" class="header__logo">
+            <nav class="header__nav">
+                <ul class="nav__list">
+                  <li class="nav__item"><a (click)="navigateTo('/perfil')" class="nav__link">Perfil</a></li>
+                  <li class="nav__item"><a (click)="navigateTo('/notificacion')" class="nav__link">Notificaciones</a></li>
+                  <li class="nav__item"><a (click)="navigateTo('/login')" class="nav__link">Cerrar sesión</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main class="main-container">
+        <section class="notifications">
+            <h2 class="section__title">Notificaciones</h2>
+            <div class="notification-container">
+                <div class="notification-item">
+                    <div class="notification-header">
+                        <span class="notification-sender">Secretaría de la Facultad de Ciencias</span>
+                        <span class="notification-date">Hoy a las 11:45 AM</span>
+                    </div>
+                    <p class="notification-summary">Solicitud de documento para el proyecto de investigación. ¿Puedes proporcionarlo?</p>
+                    <div class="notification-full">
+                        <p class="notification-message">Esta es la notificación completa. Puedes agregar más detalles aquí si es necesario.</p>
+                    </div>
+                    <button class="expand-button">Expandir</button>
+                </div>
+                <div class="notification-item">
+                    <div class="notification-header">
+                        <span class="notification-sender">Secretaría de la Facultad de Ingeniería</span>
+                        <span class = "notification-date">Ayer a las 2:30 PM</span>
+                    </div>
+                    <p class="notification-summary">Nueva solicitud de inscripción de estudiante.</p>
+                    <div class="notification-full">
+                        <p class="notification-message">Esta es otra notificación con detalles adicionales.</p>
+                    </div>
+                    <button class="expand-button">Expandir</button>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>

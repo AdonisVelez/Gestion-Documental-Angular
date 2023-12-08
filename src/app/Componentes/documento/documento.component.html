@@ -1,0 +1,75 @@
+<body>
+  <header class="header">
+    <div class="header__content">
+      <img src="assets/descarga.png" alt="Logo ULEAM" class="header__logo">
+      <nav class="header__nav">
+        <ul class="nav__list">
+          <li class="nav__item"><a (click)="navigateTo('/perfil')" class="nav__link">Perfil</a></li>
+          <li class="nav__item"><a (click)="navigateTo('/notificacion')" class="nav__link">Notificaciones</a></li>
+          <li class="nav__item"><a (click)="navigateTo('/login')" class="nav__link">Cerrar sesión</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-container">
+    <h1 class="page-title">Documentos</h1>
+    <div class="controls">
+      <form class="search-form">
+        <input type="text" placeholder="Buscar documentos..." class="search-input" name="searchInput" [(ngModel)]="searchInput">
+        <button type="button" class="search-button" (click)="buscarDocumentos()">Buscar</button>
+      </form>
+      <button class="delete-button" (click)="eliminarDocumentosMarcados()">Eliminar Documentos</button>
+      <button class="add-button" (click)="agregarDocumento()">Agregar Documento</button>
+      <div class="category-dropdown">
+        <select class="category-select" id="categorySelect" [(ngModel)]="categorySelectValue" (change)="filtrarDocumentosPorCategoria()">
+          <option value="todos">Todos</option>
+          <option value="solicitudes">Solicitudes</option>
+          <option value="reingresos">Reingresos</option>
+          <option value="retiro">Retiro</option>
+          <option value="mallas">Mallas</option>
+          <option value="justificacion">Justificación</option>
+        </select>
+      </div>
+      <div *ngIf="noResultsFound" class="no-results-message">
+        No se encontraron documentos.
+      </div>
+    </div>
+    <table class="document-table">
+      <thead>
+        <tr>
+          <th><input type="checkbox" (change)="seleccionarTodos()"> Todos</th>
+          <th>Nombre</th>
+          <th>Categoría</th>
+          <th>Fecha</th>
+          <th>Destinatario</th>
+          <th>Facultad</th>
+          <th>Carrera</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody id="documentList">
+        <tr *ngFor="let documento of documentList" [class.selected]="documento.marcado">
+          <td><input type="checkbox" (change)="seleccionarDocumento(documento)"></td>
+          <td><a href="javascript:void(0);" (click)="verDocumento(documento)">{{ documento.nombre }}</a></td>
+          <td>{{ documento.categoria }}</td>
+          <td>{{ documento.fecha }}</td>
+          <td>{{ documento.destinatario }}</td>
+          <td>{{ documento.facultad }}</td>
+          <td> {{ documento.carrera }} </td>
+          <td>{{ documento.descripcion }}</td>
+        <td>
+          <button class="edit-button" (click)="verDocumento(documento)">ver</button>
+        </td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+
+  <section class="mission-vision">
+    <h2 class="section__title">Misión y Visión de la Documentación</h2>
+    <p class="mission-vision__text">
+      Nuestra misión es proporcionar acceso eficiente a la documentación necesaria para los procesos académicos y administrativos de la ULEAM. La visión es convertirnos en un recurso de referencia confiable para todos los miembros de la comunidad universitaria.
+    </p>
+  </section>
+</body>

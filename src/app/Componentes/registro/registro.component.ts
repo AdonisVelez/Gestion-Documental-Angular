@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/shared/service/auth.service';
+import { UserProfileService } from 'src/app/shared/service/user-profile.service';
 
 @Component({
   selector: 'app-registro',
@@ -11,29 +13,89 @@ export class RegistroComponent {
   registroForm: FormGroup;
   formSubmitted = false;
 
-  constructor(private formBuilder: FormBuilder, private router: Router) {
-    //Inicializa el formulario de registro con campos y validadores
+  constructor(
+    private authService: AuthService,
+    private formBuilder: FormBuilder,
+    private userProfileService: UserProfileService,
+    private router: Router
+  ) {
     this.registroForm = this.formBuilder.group({
-      nombre: ['', [Validators.required]], //Validación de requerido 
-      apellido: ['', [Validators.required]], //Validación de requerido 
-      password: ['', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)]], //Validación de requerido y formato de contraseñas
-      correo: ['', [Validators.required, Validators.email]], //Validación de requerido y formato de email
-      telefono: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]], //Validación de requerido y formato de telefono
-      cedula: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]], //Validación de requerido y formato de Cedelua
-      pais: ['', [Validators.required]],//Validación de requerido
+      nombre: ['', [Validators.required]],
+      apellido: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)]],
+      email: ['', [Validators.required, Validators.email]],
+      telefono: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
+      cedula: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
+      pais: ['', [Validators.required]],
     });
   }
 
-  // Metodo para dirigir al incio al dar clic en el boton atras
+  get nombreControl() {
+    return this.registroForm.get('nombre');
+  }
+
+  get apellidoControl() {
+    return this.registroForm.get('apellido');
+  }
+
+  get passwordControl() {
+    return this.registroForm.get('password');
+  }
+
+  get emailControl() {
+    return this.registroForm.get('email');
+  }
+
+  get telefonoControl() {
+    return this.registroForm.get('telefono');
+  }
+
+  get cedulaControl() {
+    return this.registroForm.get('cedula');
+  }
+
+  get paisControl() {
+    return this.registroForm.get('pais');
+  }
+
   regresar() {
     this.router.navigate(['/login']);
   }
-  
-  //Método que se ejecuta al enviar el formulario de registro y me direcciona al login
-  onSubmit() {
-    this.formSubmitted = true; 
+
+  signUp(): void {
     if (this.registroForm.valid) {
-      this.router.navigate(['/login']);
+      const email = this.emailControl?.value;
+      const password = this.passwordControl?.value;
+      const nombre = this.nombreControl?.value;
+      const apellido = this.apellidoControl?.value;
+      const displayName = `${this.nombreControl?.value} ${this.apellidoControl?.value}`;
+      const telefono = this.telefonoControl?.value;
+      const cedula = this.cedulaControl?.value;
+      const pais = this.paisControl?.value;
+
+      this.authService.signUpWithEmailAndPassword(email, password, displayName)
+        .then(() => {
+          // Guardar información en UserProfileService
+          this.userProfileService.saveUserProfileData({
+            email,
+            nombre,
+            apellido,
+            telefono,
+            cedula,
+            pais,
+          });
+
+          this.router.navigate(['/login']);
+        })
+        .catch((error: any) => {
+          console.error(error);
+          // Trata el error de manera más apropiada aquí
+        });
     }
+  }
+
+  onSubmit() {
+    this.formSubmitted = true;
+    this.signUp();
   }
 }

@@ -14,13 +14,13 @@
             </div>
             <div class="form-group">
                 <label for="password">Contraseña</label>
-                <input type="password" id="password" formControlName="password" placeholder="Contraseña" required>
+                <input type="password" id="password" formControlName="password" placeholder="Contraseña" required #password>
                 <div class="error-message" *ngIf="formSubmitted && registroForm.get('password')?.hasError('required')">Contraseña es requerida</div>
                 <div class="error-message" *ngIf="formSubmitted && registroForm.get('password')?.hasError('pattern')">La contraseña debe tener al menos 8 caracteres, una mayúscula y un número</div>
             </div>
             <div class="form-group">
-                <label for="correo">Correo Electrónico</label>
-                <input type="email" id="Correo" formControlName="correo" placeholder="Correo Electrónico" required>
+                <label for="Email">Correo Electrónico</label>
+                <input type="email" id="Email" formControlName="email" placeholder="Correo Electrónico" required #email>
                 <div class="error-message" *ngIf="formSubmitted && registroForm.get('correo')?.hasError('required')">Correo electronico es requerida</div>
                 <div class="error-message" *ngIf="formSubmitted && registroForm.get('correo')?.hasError('pattern')">Ingresar un correo electronico valido</div>
             </div>

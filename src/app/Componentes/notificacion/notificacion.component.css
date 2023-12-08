@@ -1,0 +1,126 @@
+/* Estilos para la Interfaz de Notificaciones */
+body {
+    background-color: #F2F2F2;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.header {
+    background-color: #cf1e1e;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header__content {
+    max-width: 100%;
+    max-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header__logo {
+    max-width: 100%;
+    height: auto;
+    margin-right: 20px;
+}
+
+.nav__list {
+    list-style: none;
+    padding: 0;
+    text-align: right;
+    margin-left: auto;
+}
+
+.nav__item {
+    display: inline;
+    margin: 0 10px;
+}
+
+.nav__link {
+    text-decoration: none;
+    color: #fff;
+}
+
+.main-container {
+    padding: 20px;
+}
+
+.notifications {
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.section__title {
+    font-size: 24px;
+    margin: 0;
+    color: #cf1e1e;
+}
+
+.notification-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.notification-item {
+    width: 80%;
+    background-color: #fff;
+    border: 1px solid #e2e2e2;
+    margin: 20px 0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.notification-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.notification-sender,
+.notification-date {
+    font-weight: bold;
+    color: #333;
+}
+
+.notification-summary {
+    color: #333;
+    margin: 10px 0;
+}
+
+.notification-full {
+    display: none;
+    color: #333;
+    transition: max-height 0.3s ease-in-out; 
+}
+
+.notification-full.expanded {
+    display: block;
+    max-height: 1000px;
+}
+
+
+.expand-button {
+    background-color: #cf1e1e;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+
+.expand-button:hover {
+    background-color: #ff5252;
+}

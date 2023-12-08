@@ -1,0 +1,52 @@
+<body> 
+    <div class="container">
+      <h2>Añadir Documento</h2>
+      <form>
+        <div class="form-group">
+          <label for="archivoDocumento">Archivo:</label>
+          <input type="file" id="archivoDocumento" (change)="onFileSelected($event)" accept=".pdf, .doc, .docx" required>
+        </div>
+        <div class="form-group">
+          <label for="nombreDocumento">Nombre del Documento:</label>
+          <input type="text" id="nombreDocumento" [(ngModel)]="documento.nombre" name="nombreDocumento" required>
+        </div>
+        <div class="form-group">
+          <label for="facultad">Facultad:</label>
+          <select id="facultad" [(ngModel)]="documento.facultad" name="facultad" required>
+            <option value="" disabled selected>Selecciona una facultad</option>
+            <option *ngFor="let f of facultades" [value]="f">{{f}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="carrera">Carrera:</label>
+          <select id="carrera" [(ngModel)]="documento.carrera" name="carrera" required *ngIf="documento.facultad">
+            <option value="" disabled selected>Selecciona una carrera</option>
+            <option *ngFor="let c of getCarrerasPorFacultad()" [value]="c">{{ c }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="categoriaDocumento">Categoría:</label>
+          <select id="categoriaDocumento" [(ngModel)]="documento.categoria" name="categoriaDocumento" required>
+            <option value="solicitudes">Solicitudes</option>
+            <option value="reingresos">Reingresos</option>
+            <option value="retiro">Retiro</option>
+            <option value="mallas">Mallas</option>
+            <option value="justificacion">Justificación</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="destinatarioDocumento">Destinatario:</label>
+          <input type="text" id="destinatarioDocumento" [(ngModel)]="documento.destinatario" name="destinatarioDocumento" required>
+        </div>
+        <div class="form-group">
+          <label for="descripcionDocumento">Descripción:</label>
+          <textarea id="descripcionDocumento" [(ngModel)]="documento.descripcion" name="descripcionDocumento" required></textarea>
+        </div>
+        <div class="form-group">
+          <button type="button" (click)="guardarDocumento()">Guardar Documento</button>
+          <button type="button" (click)="cancelar()">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </body>
+  
