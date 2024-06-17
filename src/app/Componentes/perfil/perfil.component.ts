@@ -33,7 +33,7 @@ export class PerfilComponent implements OnInit {
       const userProfileData = this.userProfileService.getUserProfileData();
       
       // Actualiza los campos del perfil con los datos recuperados
-      this.nombre = userProfileData.displayName;
+      this.nombre = userProfileData.nombre;
       this.apellido = userProfileData.apellido;
       this.telefono = userProfileData.telefono;
       this.cedula = userProfileData.cedula;
@@ -49,7 +49,7 @@ export class PerfilComponent implements OnInit {
   guardarCambios() {
     // Guarda los cambios en UserProfileService
     this.userProfileService.saveUserProfileData({
-      displayName: this.nombre,
+      nombre: this.nombre,
       telefono: this.telefono,
       cedula: this.cedula,
       pais: this.pais
